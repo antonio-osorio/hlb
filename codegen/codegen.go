@@ -3,7 +3,6 @@ package codegen
 import (
 	"context"
 	"fmt"
-	"github.com/openllb/hlb/debugger"
 	"io"
 	"net"
 	"os"
@@ -12,12 +11,14 @@ import (
 	"github.com/docker/buildx/util/progress"
 	"github.com/docker/cli/cli/command"
 	"github.com/docker/cli/cli/flags"
-	shellquote "github.com/kballard/go-shellquote"
+	"github.com/kballard/go-shellquote"
 	"github.com/moby/buildkit/client/llb"
 	"github.com/moby/buildkit/client/llb/imagemetaresolver"
 	"github.com/moby/buildkit/solver/pb"
-	digest "github.com/opencontainers/go-digest"
+	"github.com/opencontainers/go-digest"
+
 	"github.com/openllb/hlb/checker"
+	"github.com/openllb/hlb/debugger"
 	"github.com/openllb/hlb/parser"
 	"github.com/openllb/hlb/solver"
 )

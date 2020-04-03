@@ -4,7 +4,6 @@ import (
 	"context"
 	"encoding/csv"
 	"fmt"
-	"github.com/openllb/hlb/debugger"
 	"io"
 	"os"
 	"strings"
@@ -13,9 +12,11 @@ import (
 	"github.com/mattn/go-isatty"
 	"github.com/moby/buildkit/client"
 	"github.com/moby/buildkit/util/appcontext"
+	"github.com/urfave/cli/v2"
+
 	"github.com/openllb/hlb"
+	"github.com/openllb/hlb/debugger"
 	"github.com/openllb/hlb/solver"
-	cli "github.com/urfave/cli/v2"
 )
 
 var runCommand = &cli.Command{
