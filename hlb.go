@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"context"
 	"fmt"
+	"github.com/openllb/hlb/debugger"
 	"io"
 	"os"
 
@@ -135,7 +136,7 @@ func Compile(ctx context.Context, cln *client.Client, mw *progress.MultiWriter, 
 
 	if mw == nil {
 		r := bufio.NewReader(os.Stdin)
-		opts = append(opts, codegen.WithDebugger(codegen.NewDebugger(cln, os.Stderr, r, ibs)))
+		opts = append(opts, codegen.WithDebugger(debugger.NewDebugger(cln, os.Stderr, r, ibs)))
 		err = gen()
 	} else {
 		pw := mw.WithPrefix("codegen", false)

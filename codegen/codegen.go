@@ -3,6 +3,7 @@ package codegen
 import (
 	"context"
 	"fmt"
+	"github.com/openllb/hlb/debugger"
 	"io"
 	"net"
 	"os"
@@ -22,7 +23,7 @@ import (
 )
 
 type CodeGen struct {
-	Debug     Debugger
+	Debug     debugger.Debugger
 	request   solver.Request
 	mw        *progress.MultiWriter
 	dockerCli *command.DockerCli
@@ -31,7 +32,7 @@ type CodeGen struct {
 
 type CodeGenOption func(*CodeGen) error
 
-func WithDebugger(dbgr Debugger) CodeGenOption {
+func WithDebugger(dbgr debugger.Debugger) CodeGenOption {
 	return func(i *CodeGen) error {
 		i.Debug = dbgr
 		return nil
@@ -47,7 +48,7 @@ func WithMultiWriter(mw *progress.MultiWriter) CodeGenOption {
 
 func New(opts ...CodeGenOption) (*CodeGen, error) {
 	cg := &CodeGen{
-		Debug: NewNoopDebugger(),
+		Debug: debugger.NewNoopDebugger(),
 	}
 	for _, opt := range opts {
 		err := opt(cg)

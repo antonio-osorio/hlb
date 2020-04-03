@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/csv"
 	"fmt"
+	"github.com/openllb/hlb/debugger"
 	"io"
 	"os"
 	"strings"
@@ -13,7 +14,6 @@ import (
 	"github.com/moby/buildkit/client"
 	"github.com/moby/buildkit/util/appcontext"
 	"github.com/openllb/hlb"
-	"github.com/openllb/hlb/codegen"
 	"github.com/openllb/hlb/solver"
 	cli "github.com/urfave/cli/v2"
 )
@@ -148,7 +148,7 @@ func Run(ctx context.Context, cln *client.Client, rc io.ReadCloser, opts RunOpti
 	solveReq, err := hlb.Compile(ctx, cln, mw, targets, rc)
 	if err != nil {
 		// Ignore early exits from the debugger.
-		if err == codegen.ErrDebugExit {
+		if err == debugger.ErrDebugExit {
 			return nil
 		}
 		return err
